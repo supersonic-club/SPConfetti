@@ -78,7 +78,14 @@ public struct SPConfettiParticlesConfig {
      SPConfetti: The scale factor.
      */
     public var contentsScale: CGFloat = 0.5
-    /**
+
+     /**
+     SPConfetti: Specifies the scale of the cell.
+     */
+    public var scale: CGFloat = 1
+
+ 
+     /**
      SPConfetti: Specifies the range over which the scale value can vary.
      */
     public var scaleRange: CGFloat = 1
