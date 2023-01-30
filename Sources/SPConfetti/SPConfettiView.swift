@@ -213,6 +213,7 @@ open class SPConfettiView: UIView {
         cell.contentsScale = 1 / particlesConfig.contentsScale
         cell.scaleRange = particlesConfig.scaleRange
         cell.scaleSpeed = particlesConfig.scaleSpeed
+        cell.scale = particlesConfig.scale
         cell.beginTime = CACurrentMediaTime()
         switch self.animation {
         case .fullWidthToDown:
