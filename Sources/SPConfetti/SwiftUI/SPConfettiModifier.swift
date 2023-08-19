@@ -66,7 +66,7 @@ struct ConfettiPlaceholderView: UIViewRepresentable {
         init(isPresented: Binding<Bool>) {
             self.isPresented = isPresented
             isReleasesParticles = false
-            super.init(frame: .zero)
+            super.init(frame: UIScreen.main.bounds)
             backgroundColor = .clear
             isUserInteractionEnabled = false
         }
@@ -84,7 +84,7 @@ struct ConfettiPlaceholderView: UIViewRepresentable {
                 SPConfetti.startAnimating(animation,
                                           particles: particles,
                                           duration: duration,
-                                          in: self.window)
+                                          in: self)
                 
                 delay(duration) { [weak self] in
                     self?.stop()
@@ -92,7 +92,7 @@ struct ConfettiPlaceholderView: UIViewRepresentable {
             } else {
                 SPConfetti.startAnimating(animation,
                                           particles: particles,
-                                          in: self.window)
+                                          in: self)
             }
         }
         
@@ -130,7 +130,7 @@ extension View {
      - parameter duration: Automatically stop animation after this time interval.
      */
     public func confetti(isPresented: Binding<Bool>, animation: SPConfettiAnimation, particles: [SPConfettiParticle], duration: TimeInterval?) -> some View {
-        self.background(
+        self.overlay(
             ConfettiPlaceholderView(isPresented: isPresented, animation: animation, particles: particles, duration: duration)
                 .allowsHitTesting(false)
         )

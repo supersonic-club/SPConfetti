@@ -42,17 +42,13 @@ public class SPConfetti {
      - parameter window: The targe window. Use key window if `nil`.
      */
     @available(iOSApplicationExtension, unavailable)
-    public static func startAnimating(_ animation: SPConfettiAnimation, particles: [SPConfettiParticle], in window: UIWindow? = nil) {
+    public static func startAnimating(_ animation: SPConfettiAnimation, particles: [SPConfettiParticle], in view: UIView) {
         shared.view.animation = animation
         shared.view.particles = particles
-        let keyWindow = UIApplication.shared.windows.first { $0.isKeyWindow }
-        guard let window = window ?? keyWindow else { return }
-        if let superview = shared.view.superview, superview == window {
-            superview.bringSubviewToFront(shared.view)
-        } else {
-            window.addSubview(shared.view)
-        }
-        shared.view.frame = window.bounds
+        
+        view.addSubview(shared.view)
+
+        shared.view.frame = view.frame
         shared.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         shared.view.startAnimating()
     }
@@ -66,8 +62,8 @@ public class SPConfetti {
      - parameter window: The targe window. Use key window if `nil`.
      */
     @available(iOSApplicationExtension, unavailable)
-    public static func startAnimating(_ animation: SPConfettiAnimation, particles: [SPConfettiParticle], duration: TimeInterval, in window: UIWindow? = nil) {
-        startAnimating(animation, particles: particles, in: window)
+    public static func startAnimating(_ animation: SPConfettiAnimation, particles: [SPConfettiParticle], duration: TimeInterval, in view: UIView) {
+        startAnimating(animation, particles: particles, in: view)
         delay(duration, closure: {
             stopAnimating()
         })
